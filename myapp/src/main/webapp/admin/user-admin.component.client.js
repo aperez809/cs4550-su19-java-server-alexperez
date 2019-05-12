@@ -13,6 +13,8 @@
     const userRowTemplate = $('.userRowTemplate');
     const tbody = $('tbody');
 
+    $.ajax;
+
     $createBtn.click(createUser);
     $deleteBtn.click(deleteUser);
 
