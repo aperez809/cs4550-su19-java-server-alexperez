@@ -12,21 +12,30 @@
     const $roleFld = $('#roleFld');
     const userRowTemplate = $('.userRowTemplate');
     const tbody = $('tbody');
+    const findAllUsersUrl = 'http://localhost:8080/users';
+    const deleteUserUrl = 'http://localhost:8080/users/USER_ID';
 
-    $.ajax;
+    $.ajax(findAllUsersUrl, {
+        'success': handleUsers
+    });
+
+    //Array of Users ->
+    function handleUsers(users) {
+        for(i in users) {
+            appendUserToDom(users[i]);
+        }
+    }
 
     $createBtn.click(createUser);
     $deleteBtn.click(deleteUser);
 
+    // User -> HTML row element
+    function appendUserToDom(user) {
 
-    function createUser() {
-        const username = $usernameFld.val();
-        const password = $passwordFld.val();
-        const firstName = $firstNameFld.val();
-        const lastName = $lastNameFld.val();
-        const role = $roleFld.val();
-
+        //clone the template and remove the d-none class from it
+        //so that data is still visible
         const row = userRowTemplate.clone();
+        row.removeClass('d-none');
 
         const usernameCol = row.find(".usernameCol");
         const passwordCol = row.find(".passwordCol");
@@ -38,13 +47,14 @@
         //so button functionality is maintained
         const deleteBtn = row.find('.delete-btn');
         deleteBtn.click(deleteUser);
+        deleteBtn.attr("id", user.id);
 
         //set html of each object to equal the relevant value from the form
-        usernameCol.html(username);
-        passwordCol.html(password);
-        firstNameCol.html(firstName);
-        lastNameCol.html(lastName);
-        roleCol.html(role);
+        usernameCol.html(user.username);
+        passwordCol.html(user.password);
+        firstNameCol.html(user.firstName);
+        lastNameCol.html(user.lastName);
+        roleCol.html(user.role);
 
         //reset form values
         $usernameFld.val("");
@@ -54,13 +64,42 @@
 
         //append new user to bottom of the table
         tbody.append(row);
+
+    }
+
+    function createUser() {
+        const username = $usernameFld.val();
+        const password = $passwordFld.val();
+        const firstName = $firstNameFld.val();
+        const lastName = $lastNameFld.val();
+        const role = $roleFld.val();
+        const user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            role: role
+        };
+
+        appendUserToDom(user);
     }
 
     function deleteUser(event) {
+        //grab delete button and assign an "id" attribute to it
+        //use the globally defined deleteUserUrl to input the id and send
+        //request to server
+        const deleteBtn = $(event.currentTarget);
+        const id = deleteBtn.attr("id");
+        const url = deleteUserUrl.replace("USER_ID", id);
+
+        $.ajax(url, {
+            "type": "DELETE",
+            "success": handleUsers
+        });
 
         //get the grandparent element of the delete button (parent == td holding the buttons,
         //grandparent == row itself) and remove it
-        const row = $(event.currentTarget).parent().parent();
+        const row = deleteBtn.parent().parent();
         row.remove();
     }
 

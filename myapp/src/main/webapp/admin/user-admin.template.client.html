@@ -7,9 +7,8 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link href="user-admin.style.client.css" rel="stylesheet" />
+    <!--<link href="user-admin.style.client.css" rel="stylesheet" />-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../services/user.service.client.js"></script>
 
 </head>
 
@@ -73,7 +72,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="userRowTemplate">
+        <tr class="userRowTemplate d-none">
             <td class="usernameCol">ada</td>
             <td class="passwordCol">****</td>
             <td class="firstNameCol">Ada</td>
@@ -84,24 +83,12 @@
                 <button class="btn btn-warning edit-btn">Edit</button>
             </td>
         </tr>
-
-        <tr>
-            <td>bob</td>
-            <td>****</td>
-            <td>Bob</td>
-            <td>The Builder</td>
-            <td>STUDENT</td>
-            <td>
-                <button class="btn btn-danger delete-btn">Delete</button>
-                <button class="btn btn-warning edit-btn">Edit</button>
-            </td>
-        </tr>
         </tbody>
     </table>
 </div>
 <script
-        src="https://code.jquery.com/jquery-3.4.1.slim.js"
-        integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous">
 </script>
 <script src="user-admin.component.client.js"></script>
