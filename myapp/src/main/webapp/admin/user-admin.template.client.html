@@ -3,109 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <title>User Admin</title>
-    <link rel="stylesheet" href=
-            "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href=
-            "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="user-admin.style.client.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../services/user.service.client.js"></script>
-    <script src="user-admin.component.client.js"></script>
 
 </head>
 
 <body>
 <div class="container-fluid">
-<h1>User Admin</h1>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Username</th>
-        <th>Password</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Role</th>
-        <th>&nbsp;</th>
-    </tr>
-    </thead>
+    <h1>User Admin</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>&nbsp;</th>
+        </tr>
 
-    <tr>
-        <td>
-            <input id="usernameFld"
-                   class="form-control"
-                   placeholder="Username" />
-        </td>
+        <tr>
+            <td>
+                <input id="usernameFld"
+                       class="form-control"
+                       placeholder="Username" />
+            </td>
 
-        <td>
-            <input id="passwordFld"
-                   class="form-control"
-                   placeholder="Password" />
-        </td>
+            <td>
+                <input id="passwordFld"
+                       class="form-control"
+                       placeholder="Password" />
+            </td>
 
-        <td>
-            <input id="firstNameFld"
-                   class="form-control"
-                   placeholder="First Name" />
-        </td>
+            <td>
+                <input id="firstNameFld"
+                       class="form-control"
+                       placeholder="First Name" />
+            </td>
 
-        <td>
-            <input id="lastNameFld"
-                   class="form-control"
-                   placeholder="Last Name" />
-        </td>
+            <td>
+                <input id="lastNameFld"
+                       class="form-control"
+                       placeholder="Last Name" />
+            </td>
 
-        <td>
-            <select id="roleFld"
-                    class="form-control">
-                <option value="FACULTY">Faculty</option>
-                <option value="STUDENT">Student</option>
-                <option value="ADMIN">Admin</option>
-            </select>
-        </td>
+            <td>
+                <select id="roleFld"
+                        class="form-control">
+                    <option value="FACULTY">Faculty</option>
+                    <option value="STUDENT">Student</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </td>
 
-        <td>
-            <button class="btn btn-success">Update</button>
-            <button class="btn btn-primary">Create</button>
-        </td>
+            <td>
+                <button id="updateBtn" class="btn btn-success">Update</button>
+                <button id="createBtn" class="btn btn-primary">Create</button>
+            </td>
 
 
             <!--<i class="fa-2x fa fa-search wbdv-search"></i> <i
                 class="fa-2x fa fa-plus wbdv-create"></i> <i
                 class="fa-2x fa fa-check wbdv-update"></i>-->
-    </tr>
-    <tbody>
-<tr>
-    <td>ada</td>
-    <td>****</td>
-    <td>Ada</td>
-    <td>Lovelace</td>
-    <td>FACULTY</td>
-    <td>
-        <button class="btn btn-danger">Delete</button>
-        <button class="btn btn-warning">Edit</button>
-    </td>
-</tr>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="userRowTemplate">
+            <td class="usernameCol">ada</td>
+            <td class="passwordCol">****</td>
+            <td class="firstNameCol">Ada</td>
+            <td class="lastNameCol">Lovelace</td>
+            <td class="roleCol">FACULTY</td>
+            <td>
+                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-warning">Edit</button>
+            </td>
+        </tr>
 
-<tr>
-    <td>bob</td>
-    <td>****</td>
-    <td>Bob</td>
-    <td>The Builder</td>
-    <td>STUDENT</td>
-    <td>
-        <button class="btn btn-danger">Delete</button>
-        <button class="btn btn-warning">Edit</button>
-    </td>
-</tr>
-</tbody>
-</table>
-
-
-<script src="admin.component.client.js"></script>
+        <tr>
+            <td>bob</td>
+            <td>****</td>
+            <td>Bob</td>
+            <td>The Builder</td>
+            <td>STUDENT</td>
+            <td>
+                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-warning">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <script
         src="https://code.jquery.com/jquery-3.4.1.slim.js"
         integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
         crossorigin="anonymous">
 </script>
-</div>
+<script src="user-admin.component.client.js"></script>
+
 </body>
