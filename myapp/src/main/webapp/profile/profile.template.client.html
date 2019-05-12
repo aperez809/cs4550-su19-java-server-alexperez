@@ -1,0 +1,102 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h1>Profile</h1>
+
+    <form>
+
+        <!--Username input field-->
+        <div class="form-group row">
+
+            <label for="username"
+                   class="col-sm-2 col-form-label">
+                Username</label>
+
+            <div class="col-sm-10">
+                <input class="form-control"
+                       id="username"
+                       placeholder="Alice">
+            </div>
+
+        </div>
+
+        <!--Phone number input field-->
+        <div class="form-group row">
+            <label for="phone"
+                   class="col-sm-2 col-form-label">
+                Phone </label>
+
+            <div class="col-sm-10">
+                <input class="form-control"
+                       type="tel"
+                       id="phone"
+                       placeholder="(555)-555-5555">
+            </div>
+        </div>
+
+        <!--Email input field-->
+        <div class="form-group row">
+            <label for="email"
+                   class="col-sm-2 col-form-label">
+                Email </label>
+
+            <div class="col-sm-10">
+                <input class="form-control wbdv-password-fld"
+                       type="email"
+                       id="email"
+                       placeholder="alice@wonderland.com">
+            </div>
+        </div>
+
+        <!--Role input field (dropdown)-->
+        <div class="form-group row">
+            <label for="role"
+                   class="col-sm-2 col-form-label">
+                Role </label>
+
+            <div class="col-sm-10">
+                <select class="form-control"
+                        id="role">
+                    <option>Faculty</option>
+                    <option>Student</option>
+                </select>
+            </div>
+        </div>
+
+        <!--date of birth input field-->
+        <div class="form-group row">
+            <label for="dob"
+                   class="col-sm-2 col-form-label">
+                Date of Birth </label>
+
+            <div class="col-sm-10">
+                <input type="date"
+                       class="form-control "
+                       id="dob"
+                       placeholder="123qwe#$%">
+            </div>
+        </div>
+
+        <!--Update and Logout Buttons -->
+
+        <!--Update Button-->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <button class="btn btn-success btn-block">Update</button>
+            </div>
+        </div>
+
+        <!--Logout Button-->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <button class="btn btn-danger btn-block">Logout</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
