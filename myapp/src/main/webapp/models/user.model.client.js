@@ -1,6 +1,7 @@
 (function () {
 
-    function User(username, password, firstName, lastName, phone, role, dateofBirth) {
+    function User(id, username, password, firstName, lastName, phone, role, dateofBirth) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -8,6 +9,9 @@
         this.phone = phone;
         this.role = role;
         this.dateOfBirth = dateofBirth;
+
+        this.setId = setId;
+        this.getId = getId;
 
         this.setUsername = setUsername;
         this.getUsername = getUsername;
@@ -29,6 +33,14 @@
 
         this.setDateOfBirth = setDateOfBirth;
         this.getDateOfBirth = getDateOfBirth;
+
+        function setId(Id) {
+            this.Id = Id;
+        }
+
+        function getId() {
+            return this.Id;
+        }
 
         function setUsername(username) {
             this.username = username;
