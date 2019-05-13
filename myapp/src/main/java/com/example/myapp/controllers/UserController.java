@@ -3,6 +3,7 @@ package com.example.myapp.controllers;
 import com.example.myapp.models.User;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -40,12 +41,22 @@ public class UserController {
 
   List<User> userAL = new ArrayList<>(Arrays.asList(users));
 
-  @GetMapping("/users")
+  @GetMapping("/api/users")
   public List<User> findAllUsers() {
     return userAL;
   }
 
-  @DeleteMapping("/users/delete/{userId}")
+  @GetMapping("/api/users/find/{userId}")
+  public User findUserById(@PathVariable int userId) {
+    for (User u: userAL) {
+      if (u.getId() == userId) {
+        return u;
+      }
+    }
+    return null;
+  }
+
+  @DeleteMapping("/api/users/delete/{userId}")
   public List<User> deleteUser(@PathVariable("userId") int userId) {
     User toDelete = null;
 
@@ -63,7 +74,7 @@ public class UserController {
     return userAL;
   }
 
-  @PutMapping("/users/update/{userId}")
+  @PutMapping("/api/users/update/{userId}")
   public void editUser(@PathVariable("userId") int userId) {
     User toEdit = null;
 
@@ -79,8 +90,11 @@ public class UserController {
     }
   }
 
-  @PostMapping("/users/create/{userId}")
-  public User createUser(@PathVariable("userId") int userId) {
-    return null;
+  @PostMapping("/api/users/create")
+  public User createUser(@RequestBody User u) {
+    u.setId(userAL.size() + 1);
+    userAL.add(u);
+    System.out.println(userAL);
+    return u;
   }
 }

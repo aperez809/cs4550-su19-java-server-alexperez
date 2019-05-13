@@ -1,5 +1,7 @@
 (function () {
 
+    const userService = new AdminUserServiceClient();
+
     const $createBtn = $('#createBtn');
     const $updateBtn = $('#updateBtn');
     const $deleteBtn = $('.delete-btn');
@@ -12,17 +14,21 @@
     const $roleFld = $('#roleFld');
     const userRowTemplate = $('.userRowTemplate');
     const tbody = $('tbody');
-    const findAllUsersUrl = 'http://localhost:8080/users';
-    const deleteUserUrl = 'http://localhost:8080/users/delete/USER_ID';
-    const editUserUrl = 'http://localhost:8080/users/edit/USER_ID';
+    const findAllUsersUrl = 'http://localhost:8080/api/users';
+    const deleteUserUrl = 'http://localhost:8080/api/users/delete/USER_ID';
+    const editUserUrl = 'http://localhost:8080/api/users/edit/USER_ID';
 
     $.ajax(findAllUsersUrl, {
         'success': renderUsers
     });
 
     //Array of Users -> HTML row elements
-    function renderUsers(users) {
-        users.forEach(appendUserToDom);
+    function renderUsers() {
+        tbody.empty();
+
+        userService.findAllUsers(null).then(function(res) {
+            res.forEach(appendUserToDom);
+        });
     }
 
     $createBtn.click(createUser);
@@ -86,9 +92,9 @@
             role: role
         };
 
+        userService.createUser(user, null).then(renderUsers());
 
-
-        appendUserToDom(user);
+        //renderUsers();
     }
 
     function deleteUser(event) {
@@ -102,7 +108,7 @@
         $.ajax(url, {
             "type": "DELETE"
         });
-        
+
         //get the grandparent element of the delete button (parent == td holding the buttons,
         //grandparent == row itself) and remove it
         const row = deleteBtn.parent().parent();
