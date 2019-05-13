@@ -23,8 +23,9 @@ public class UserController {
                   "bob",
                   "bob",
                   "Bob",
-                  "555-555-5555",
                   "The Builder",
+                  "555-555-5555",
+
                   "Admin",
                   new Date(1994, 6, 12)),
           new User(3,
@@ -40,8 +41,8 @@ public class UserController {
   List<User> userAL = new ArrayList<>(Arrays.asList(users));
 
   @GetMapping("/users")
-  public User[] findAllUsers() {
-    return users;
+  public List<User> findAllUsers() {
+    return userAL;
   }
 
   @DeleteMapping("/users/delete/{userId}")
@@ -62,7 +63,7 @@ public class UserController {
     return userAL;
   }
 
-  @PutMapping("/users/edit/{userId}")
+  @PutMapping("/users/update/{userId}")
   public void editUser(@PathVariable("userId") int userId) {
     User toEdit = null;
 
@@ -76,5 +77,10 @@ public class UserController {
     if (toEdit != null) {
 
     }
+  }
+
+  @PostMapping("/users/create/{userId}")
+  public User createUser(@PathVariable("userId") int userId) {
+    return null;
   }
 }
