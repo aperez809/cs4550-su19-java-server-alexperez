@@ -18,6 +18,8 @@
     const deleteUserUrl = 'http://localhost:8080/api/users/delete/USER_ID';
     const editUserUrl = 'http://localhost:8080/api/users/edit/USER_ID';
 
+    var currSelectUserId = null;
+
     $.ajax(findAllUsersUrl, {
         'success': renderUsers
     });
@@ -33,7 +35,8 @@
 
     $createBtn.click(createUser);
     $deleteBtn.click(deleteUser);
-    $editBtn.click(editUser);
+    $editBtn.click(renderUser);
+    $updateBtn.click(updateUser);
 
     // User -> HTML row element
     function appendUserToDom(user) {
@@ -54,7 +57,7 @@
         const deleteBtn = row.find('.delete-btn');
         const editBtn = row.find('.edit-btn');
         deleteBtn.click(deleteUser);
-        editBtn.click(editUser);
+        editBtn.click(renderUser);
 
 
         deleteBtn.attr("id", user.id);
@@ -75,7 +78,6 @@
 
         //append new user to bottom of the table
         tbody.append(row);
-
     }
 
     function createUser() {
@@ -93,8 +95,6 @@
         };
 
         userService.createUser(user, null).then(renderUsers());
-
-        //renderUsers();
     }
 
     function deleteUser(event) {
@@ -103,48 +103,45 @@
         //request to server
         const deleteBtn = $(event.currentTarget);
         const id = deleteBtn.attr("id");
-        const url = deleteUserUrl.replace("USER_ID", id);
-
-        $.ajax(url, {
-            "type": "DELETE"
-        });
-
-        //get the grandparent element of the delete button (parent == td holding the buttons,
-        //grandparent == row itself) and remove it
-        const row = deleteBtn.parent().parent();
-        row.remove();
+        userService.deleteUser(id).then(renderUsers());
     }
 
-    function editUser(event) {
-        //grab delete button and assign an "id" attribute to it
-        //use the globally defined deleteUserUrl to input the id and send
-        //request to server
+    function renderUser(event) {
+        //grab edit button and assign an "id" attribute to it
+        //use the id and send request to server
         const editBtn = $(event.currentTarget);
-        const id = editBtn.attr("id");
-        const url = editUserUrl.replace("USER_ID", id);
+        currSelectUserId = editBtn.attr("id");
 
-        const row = editBtn.parent().parent();
-
-        const usernameCol = row.find(".usernameCol");
-        const passwordCol = row.find(".passwordCol");
-        const firstNameCol = row.find(".firstNameCol");
-        const lastNameCol = row.find(".lastNameCol");
-        const roleCol = row.find(".roleCol");
-
-        console.log(usernameCol.text);
-        $usernameFld.val(usernameCol.toString());
-        $passwordFld.val(passwordCol.toString());
-        $firstNameFld.val(firstNameCol.toString());
-        $lastNameFld.val(lastNameCol);
+        userService.findUserById(currSelectUserId, null).then(function(userToRender) {
+            $usernameFld.val(userToRender.username);
+            $passwordFld.val(userToRender.password);
+            $firstNameFld.val(userToRender.firstName);
+            $lastNameFld.val(userToRender.lastName);
+        });
     }
 
     function updateUser(event) {
-        const updateBtn = $(event.currentTarget);
 
-        $.ajax(url, {
-            "type": "PUT",
-            "success": renderUsers
-        });
+        const username = $usernameFld.val();
+        const password = $passwordFld.val();
+        const firstName = $firstNameFld.val();
+        const lastName = $lastNameFld.val();
+        const role = $roleFld.val();
+        const user = {
+            id: currSelectUserId,
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            role: role
+        };
+
+        $usernameFld.val("");
+        $passwordFld.val("");
+        $firstNameFld.val("");
+        $lastNameFld.val("");
+
+        userService.updateUser(currSelectUserId, user, null).then(renderUsers());
     }
 
 })();

@@ -3,7 +3,6 @@ package com.example.myapp.controllers;
 import com.example.myapp.models.User;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -62,7 +61,6 @@ public class UserController {
 
     for (User u: userAL) {
       if (u.getId() == userId) {
-        System.out.println("USER ID FOUND");
         toDelete = u;
       }
     }
@@ -70,31 +68,33 @@ public class UserController {
     if (toDelete != null) {
       userAL.remove(toDelete);
     }
-    System.out.println(userAL);
     return userAL;
   }
 
   @PutMapping("/api/users/update/{userId}")
-  public void editUser(@PathVariable("userId") int userId) {
-    User toEdit = null;
+  public User updateUser(@RequestBody User target, @PathVariable("userId") int userId) {
+    User toUpdate = null;
 
     for (User u: userAL) {
       if (u.getId() == userId) {
-        System.out.println("USER ID FOUND");
-        toEdit = u;
+        toUpdate = u;
       }
     }
 
-    if (toEdit != null) {
-
+    if (toUpdate != null) {
+      toUpdate.setUsername(target.getUsername());
+      toUpdate.setPassword(target.getPassword());
+      toUpdate.setFirstName(target.getFirstName());
+      toUpdate.setLastName(target.getLastName());
     }
+
+    return toUpdate;
   }
 
   @PostMapping("/api/users/create")
   public User createUser(@RequestBody User u) {
     u.setId(userAL.size() + 1);
     userAL.add(u);
-    System.out.println(userAL);
     return u;
   }
 }
