@@ -65,7 +65,7 @@
     function renderUsers(users) {
         tbody.empty();
         users.forEach(appendUserToDom);
-        /*userService.findAllUsers(null).then(function(res) {
+        /*userService.findAllUsers().then(function(res) {
             res.forEach(appendUserToDom);
         });*/
     }
@@ -139,7 +139,7 @@
         }
 
         // Sends a request to the server to add new user
-        userService.createUser(user, null).then(renderUsers);
+        userService.createUser(user).then(renderUsers);
     }
 
     // ClickEvent -> List of Users
@@ -161,7 +161,7 @@
 
         // sends request to server for the user with the given id denoted
         // by the clicked edit button
-        userService.findUserById(currSelectUserId, null).then(function(userToRender) {
+        userService.findUserById(currSelectUserId).then(function(userToRender) {
             $usernameFld.val(userToRender.username);
             $passwordFld.val(userToRender.password);
             $firstNameFld.val(userToRender.firstName);
@@ -194,6 +194,6 @@
         $lastNameFld.val("");
 
         // sends request to server to update the specified user
-        userService.updateUser(currSelectUserId, user, null).then(renderUsers);
+        userService.updateUser(currSelectUserId, user).then(renderUsers);
     }
 })();

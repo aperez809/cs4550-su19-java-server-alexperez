@@ -73,30 +73,24 @@ public class UserController {
   }
 
   @PutMapping("/api/users/update/{userId}")
-  public User updateUser(@RequestBody User target, @PathVariable("userId") int userId) {
-    User toUpdate = null;
-
+  public List<User> updateUser(@RequestBody User target, @PathVariable("userId") int userId) {
     for (User u: userAL) {
       if (u.getId() == userId) {
-        toUpdate = u;
+        u.setUsername(target.getUsername());
+        u.setPassword(target.getPassword());
+        u.setFirstName(target.getFirstName());
+        u.setLastName(target.getLastName());
       }
     }
 
-    if (toUpdate != null) {
-      toUpdate.setUsername(target.getUsername());
-      toUpdate.setPassword(target.getPassword());
-      toUpdate.setFirstName(target.getFirstName());
-      toUpdate.setLastName(target.getLastName());
-    }
-
-    return toUpdate;
+    return userAL;
   }
 
   @PostMapping("/api/users/create")
-  public User createUser(@RequestBody User u) {
+  public List<User> createUser(@RequestBody User u) {
     idIncrementer += 1;
     u.setId(idIncrementer);
     userAL.add(u);
-    return u;
+    return userAL;
   }
 }
