@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+  private int idIncrementer = 3;
   User[] users = {
           new User(1,
                   "alice",
@@ -93,7 +94,8 @@ public class UserController {
 
   @PostMapping("/api/users/create")
   public User createUser(@RequestBody User u) {
-    u.setId(userAL.size() + 1);
+    idIncrementer += 1;
+    u.setId(idIncrementer);
     userAL.add(u);
     return u;
   }
