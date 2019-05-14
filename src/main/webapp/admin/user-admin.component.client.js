@@ -1,24 +1,12 @@
 (function () {
 
-    var $createBtn;
-    var $updateBtn;
-    var $deleteBtn;
-    var $editBtn;
-
-    var $usernameFld;
-    var $passwordFld;
-    var $firstNameFld;
-    var $lastNameFld;
-    var $roleFld;
+    var $createBtn, $updateBtn, $deleteBtn, $editBtn;
+    var $usernameFld, $passwordFld, $firstNameFld, $lastNameFld, $roleFld;
     var userRowTemplate;
     var tbody;
 
     var currSelectUserId;
-    var userService = new AdminUserServiceClient();
-
-    var findAllUsersUrl;
-    var deleteUserUrl;
-    var editUserUrl;
+    var userService;
 
     $(main);
 
@@ -40,9 +28,6 @@
         $roleFld = $('#roleFld');
         userRowTemplate = $('.userRowTemplate');
         tbody = $('tbody');
-        findAllUsersUrl = 'http://localhost:8080/api/users';
-        deleteUserUrl = 'http://localhost:8080/api/users/delete/USER_ID';
-        editUserUrl = 'http://localhost:8080/api/users/edit/USER_ID';
 
         currSelectUserId = null;
 
@@ -52,9 +37,7 @@
         $editBtn.click(renderUser);
         $updateBtn.click(updateUser);
 
-        $.ajax(findAllUsersUrl, {
-            'success': renderUsers
-        });
+        userService.findAllUsers().then(renderUsers);
     }
 
 

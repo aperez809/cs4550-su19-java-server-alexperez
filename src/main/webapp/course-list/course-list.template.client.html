@@ -8,7 +8,6 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!--<link href="user-admin.style.client.css" rel="stylesheet" />-->
-
 </head>
 
 <body>
@@ -23,59 +22,13 @@
             <th>Time Last Modified</th>
             <th>&nbsp;</th>
         </tr>
-
-        <tr>
-            <td>
-                <input id="usernameFld"
-                       class="form-control"
-                       placeholder="Username" />
-            </td>
-
-            <td>
-                <input id="passwordFld"
-                       class="form-control"
-                       placeholder="Password" />
-            </td>
-
-            <td>
-                <input id="firstNameFld"
-                       class="form-control"
-                       placeholder="First Name" />
-            </td>
-
-            <td>
-                <input id="lastNameFld"
-                       class="form-control"
-                       placeholder="Last Name" />
-            </td>
-
-            <td>
-                <select id="roleFld"
-                        class="form-control">
-                    <option value="FACULTY">Faculty</option>
-                    <option value="STUDENT">Student</option>
-                    <option value="ADMIN">Admin</option>
-                </select>
-            </td>
-
-            <td>
-                <button id="updateBtn" class="btn btn-success">Update</button>
-                <button id="createBtn" class="btn btn-primary">Create</button>
-            </td>
-
-
-            <!--<i class="fa-2x fa fa-search wbdv-search"></i> <i
-                class="fa-2x fa fa-plus wbdv-create"></i> <i
-                class="fa-2x fa fa-check wbdv-update"></i>-->
-        </tr>
         </thead>
         <tbody>
-        <tr class="userRowTemplate d-none">
-            <td class="usernameCol">ada</td>
-            <td class="passwordCol">****</td>
-            <td class="firstNameCol">Ada</td>
-            <td class="lastNameCol">Lovelace</td>
-            <td class="roleCol">FACULTY</td>
+        <tr class="courseRowTemplate d-none">
+            <td class="courseTitleCol">CS4550 Web Development</td>
+            <td class="ownerCol">Jose Annunziato</td>
+            <td class="dateCol">05-14-2019</td>
+            <td class="timeCol">6:17:43 PM</td>
             <td>
                 <button class="btn btn-danger delete-btn">Delete</button>
                 <button class="btn btn-warning edit-btn">Edit</button>
