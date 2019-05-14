@@ -52,8 +52,10 @@ function AdminUserServiceClient() {
 
     function deleteUser(userId, callback) {
         const deleteUrl = this.url + "delete/" + userId;
-        $.ajax(deleteUrl, {
-            "type": "DELETE"
+        return fetch(deleteUrl, {
+            method: "delete"
+        }).then(function (response) {
+            return response.json();
         });
     }
 }

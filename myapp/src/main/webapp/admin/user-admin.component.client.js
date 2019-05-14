@@ -1,44 +1,79 @@
 (function () {
 
-    const userService = new AdminUserServiceClient();
+    var $createBtn;
+    var $updateBtn;
+    var $deleteBtn;
+    var $editBtn;
 
-    const $createBtn = $('#createBtn');
-    const $updateBtn = $('#updateBtn');
-    const $deleteBtn = $('.delete-btn');
-    const $editBtn = $('.edit-btn');
+    var $usernameFld;
+    var $passwordFld;
+    var $firstNameFld;
+    var $lastNameFld;
+    var $roleFld;
+    var userRowTemplate;
+    var tbody;
 
-    const $usernameFld = $('#usernameFld');
-    const $passwordFld = $('#passwordFld');
-    const $firstNameFld = $('#firstNameFld');
-    const $lastNameFld = $('#lastNameFld');
-    const $roleFld = $('#roleFld');
-    const userRowTemplate = $('.userRowTemplate');
-    const tbody = $('tbody');
-    const findAllUsersUrl = 'http://localhost:8080/api/users';
-    const deleteUserUrl = 'http://localhost:8080/api/users/delete/USER_ID';
-    const editUserUrl = 'http://localhost:8080/api/users/edit/USER_ID';
+    var currSelectUserId;
+    var userService = new AdminUserServiceClient();
 
-    var currSelectUserId = null;
+    var findAllUsersUrl;
+    var deleteUserUrl;
+    var editUserUrl;
 
-    $.ajax(findAllUsersUrl, {
-        'success': renderUsers
-    });
+    $(main);
 
-    //Array of Users -> HTML row elements
+    //grabs all necessary elements on document load and
+    //prepares them for use with jQuery
+    function main() {
+
+        userService = new AdminUserServiceClient();
+
+        $createBtn = $('#createBtn');
+        $updateBtn = $('#updateBtn');
+        $deleteBtn = $('.delete-btn');
+        $editBtn = $('.edit-btn');
+
+        $usernameFld = $('#usernameFld');
+        $passwordFld = $('#passwordFld');
+        $firstNameFld = $('#firstNameFld');
+        $lastNameFld = $('#lastNameFld');
+        $roleFld = $('#roleFld');
+        userRowTemplate = $('.userRowTemplate');
+        tbody = $('tbody');
+        findAllUsersUrl = 'http://localhost:8080/api/users';
+        deleteUserUrl = 'http://localhost:8080/api/users/delete/USER_ID';
+        editUserUrl = 'http://localhost:8080/api/users/edit/USER_ID';
+
+        currSelectUserId = null;
+
+        //bind each button to click handler functions
+        $createBtn.click(createUser);
+        $deleteBtn.click(deleteUser);
+        $editBtn.click(renderUser);
+        $updateBtn.click(updateUser);
+
+        $.ajax(findAllUsersUrl, {
+            'success': renderUsers
+        });
+    }
+
+
+
+    // () -> HTML row elements
+    //empties the body of the table and re-renders each user returned
+    //by the findAllUsers function
     function renderUsers() {
         tbody.empty();
-
         userService.findAllUsers(null).then(function(res) {
             res.forEach(appendUserToDom);
         });
     }
 
-    $createBtn.click(createUser);
-    $deleteBtn.click(deleteUser);
-    $editBtn.click(renderUser);
-    $updateBtn.click(updateUser);
+
 
     // User -> HTML row element
+    //clone the template row grabbed in the main() function and use it to create and append a
+    //new dynamically generated row to the table
     function appendUserToDom(user) {
 
         //clone the template and remove the d-none class from it
@@ -80,6 +115,8 @@
         tbody.append(row);
     }
 
+    // Void -> Void
+    // Creates a new user based on the data passed in the form
     function createUser() {
         const username = $usernameFld.val();
         const password = $passwordFld.val();
@@ -94,24 +131,35 @@
             role: role
         };
 
-        userService.createUser(user, null).then(renderUsers());
+        // Checks for empty form values and throws an alert. Does not create user if true
+        if (username === "" || password === "" || firstName === "" || lastName === "") {
+            alert("Cannot add user with empty values");
+            return;
+        }
+
+        // Sends a request to the server to add new user
+        userService.createUser(user, null).then(renderUsers);
     }
 
+    // ClickEvent -> List of Users
+    // Responds to click event on the delete button, grabs id, and
+    // removes that row from the table body
     function deleteUser(event) {
-        //grab delete button and assign an "id" attribute to it
-        //use the globally defined deleteUserUrl to input the id and send
-        //request to server
         const deleteBtn = $(event.currentTarget);
         const id = deleteBtn.attr("id");
-        userService.deleteUser(id).then(renderUsers());
+
+        // Sends request to server to remove the specified user
+        userService.deleteUser(id).then(renderUsers);
     }
 
+    // ClickEvent -> HTML Text
+    // On edit button click, adds the given user's data to the form
     function renderUser(event) {
-        //grab edit button and assign an "id" attribute to it
-        //use the id and send request to server
         const editBtn = $(event.currentTarget);
         currSelectUserId = editBtn.attr("id");
 
+        // sends request to server for the user with the given id denoted
+        // by the clicked edit button
         userService.findUserById(currSelectUserId, null).then(function(userToRender) {
             $usernameFld.val(userToRender.username);
             $passwordFld.val(userToRender.password);
@@ -120,6 +168,8 @@
         });
     }
 
+    // ClickEvent -> List of Users
+    // On update button click, applies changes made in the form to specified user
     function updateUser(event) {
 
         const username = $usernameFld.val();
@@ -136,12 +186,13 @@
             role: role
         };
 
+        // clears form on submission
         $usernameFld.val("");
         $passwordFld.val("");
         $firstNameFld.val("");
         $lastNameFld.val("");
 
-        userService.updateUser(currSelectUserId, user, null).then(renderUsers());
+        // sends request to server to update the specified user
+        userService.updateUser(currSelectUserId, user, null).then(renderUsers);
     }
-
 })();
