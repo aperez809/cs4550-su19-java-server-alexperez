@@ -62,11 +62,12 @@
     // () -> HTML row elements
     //empties the body of the table and re-renders each user returned
     //by the findAllUsers function
-    function renderUsers() {
+    function renderUsers(users) {
         tbody.empty();
-        userService.findAllUsers(null).then(function(res) {
+        users.forEach(appendUserToDom);
+        /*userService.findAllUsers(null).then(function(res) {
             res.forEach(appendUserToDom);
-        });
+        });*/
     }
 
 
