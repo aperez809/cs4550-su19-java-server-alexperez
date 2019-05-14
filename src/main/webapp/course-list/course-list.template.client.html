@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>User Admin</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!--<link href="user-admin.style.client.css" rel="stylesheet" />-->
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <h1>Course List</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Owned By</th>
+            <th>Date Last Modified</th>
+            <th>Time Last Modified</th>
+            <th>&nbsp;</th>
+        </tr>
+
+        <tr>
+            <td>
+                <input id="usernameFld"
+                       class="form-control"
+                       placeholder="Username" />
+            </td>
+
+            <td>
+                <input id="passwordFld"
+                       class="form-control"
+                       placeholder="Password" />
+            </td>
+
+            <td>
+                <input id="firstNameFld"
+                       class="form-control"
+                       placeholder="First Name" />
+            </td>
+
+            <td>
+                <input id="lastNameFld"
+                       class="form-control"
+                       placeholder="Last Name" />
+            </td>
+
+            <td>
+                <select id="roleFld"
+                        class="form-control">
+                    <option value="FACULTY">Faculty</option>
+                    <option value="STUDENT">Student</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </td>
+
+            <td>
+                <button id="updateBtn" class="btn btn-success">Update</button>
+                <button id="createBtn" class="btn btn-primary">Create</button>
+            </td>
+
+
+            <!--<i class="fa-2x fa fa-search wbdv-search"></i> <i
+                class="fa-2x fa fa-plus wbdv-create"></i> <i
+                class="fa-2x fa fa-check wbdv-update"></i>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="userRowTemplate d-none">
+            <td class="usernameCol">ada</td>
+            <td class="passwordCol">****</td>
+            <td class="firstNameCol">Ada</td>
+            <td class="lastNameCol">Lovelace</td>
+            <td class="roleCol">FACULTY</td>
+            <td>
+                <button class="btn btn-danger delete-btn">Delete</button>
+                <button class="btn btn-warning edit-btn">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../service/user.service.client.js"></script>
+<script src="user-admin.component.client.js"></script>
+</body>

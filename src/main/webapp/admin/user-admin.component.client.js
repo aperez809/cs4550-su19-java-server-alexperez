@@ -65,9 +65,6 @@
     function renderUsers(users) {
         tbody.empty();
         users.forEach(appendUserToDom);
-        /*userService.findAllUsers().then(function(res) {
-            res.forEach(appendUserToDom);
-        });*/
     }
 
 
