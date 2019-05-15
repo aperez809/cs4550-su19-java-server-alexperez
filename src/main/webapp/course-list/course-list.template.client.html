@@ -2,18 +2,26 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>User Admin</title>
+    <title>Course List</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <!--<link href="user-admin.style.client.css" rel="stylesheet" />-->
+    <link href="course-list.style.client.css" rel="stylesheet" />
 </head>
 
 <body>
 <div class="container-fluid">
-    <h1>Course List</h1>
-    <table class="table">
+    <div class="form-row">
+        <h1 class="col-sm-3">Course List</h1>
+        <div class="web-dev-input-pad col-sm-6 btn-block">
+            <input type="text" class="form-control" placeholder="Enter Course Name"/>
+        </div>
+        <div class="col-sm-3 btn-block">
+            <button class="btn btn-primary btn-block">Create</button>
+        </div>
+    </div>
+    <table class="table web-dev-th-pad">
         <thead>
         <tr>
             <th>Title</th>
@@ -25,6 +33,26 @@
         </thead>
         <tbody>
         <tr class="courseRowTemplate d-none">
+            <td class="courseTitleCol">CS4550 Web Development</td>
+            <td class="ownerCol">Jose Annunziato</td>
+            <td class="dateCol">05-14-2019</td>
+            <td class="timeCol">6:17:43 PM</td>
+            <td>
+                <button class="btn btn-danger delete-btn">Delete</button>
+                <button class="btn btn-warning edit-btn">Edit</button>
+            </td>
+        </tr>
+        <tr class="courseRowTemplate">
+            <td class="courseTitleCol">CS4550 Web Development</td>
+            <td class="ownerCol">Jose Annunziato</td>
+            <td class="dateCol">05-14-2019</td>
+            <td class="timeCol">6:17:43 PM</td>
+            <td>
+                <button class="btn btn-danger delete-btn">Delete</button>
+                <button class="btn btn-warning edit-btn">Edit</button>
+            </td>
+        </tr>
+        <tr class="courseRowTemplate">
             <td class="courseTitleCol">CS4550 Web Development</td>
             <td class="ownerCol">Jose Annunziato</td>
             <td class="dateCol">05-14-2019</td>
