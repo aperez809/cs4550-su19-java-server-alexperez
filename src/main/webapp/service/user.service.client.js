@@ -5,7 +5,7 @@ function AdminUserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
-    this.url = 'http://localhost:8080/api/users/';
+    this.url = 'https://limitless-citadel-58042.herokuapp.com/api/users/';
     var self = this;
 
     function createUser(user) {
