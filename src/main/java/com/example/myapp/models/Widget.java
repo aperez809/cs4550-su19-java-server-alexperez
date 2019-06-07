@@ -4,7 +4,7 @@ public class Widget {
 
   private String name;
   private Long id;
-  private Enum<Type> type;
+  private String type; //make ENUM
   private int order;
   private String text;
   private String url;
@@ -14,7 +14,7 @@ public class Widget {
   private String cssClass;
   private String style;
   private String value;
-  private Enum<DataType> dataType;
+  private String dataType; //make ENUM
 
   enum Type {
 
@@ -27,7 +27,7 @@ public class Widget {
 
 
 
-  public Widget(String name, Long id, Enum<Type> type, int order, String text, String url, Integer size, Integer width, Integer height, String cssClass, String style, String value, Enum<DataType> dataType) {
+  public Widget(String name, Long id, String type, int order, String text, String url, Integer size, Integer width, Integer height, String cssClass, String style, String value, String dataType) {
     this.name = name;
     this.id = id;
     this.type = type;
@@ -41,6 +41,12 @@ public class Widget {
     this.style = style;
     this.value = value;
     this.dataType = dataType;
+  }
+
+  public Widget(Long id, String name, String type) {
+    this.id = id;
+    this.name = name;
+    this.type = type;
   }
 
   public Widget() {
@@ -63,13 +69,7 @@ public class Widget {
     this.id = id;
   }
 
-  public Enum<Type> getType() {
-    return type;
-  }
 
-  public void setType(Enum<Type> type) {
-    this.type = type;
-  }
 
   public int getOrder() {
     return order;
@@ -141,13 +141,5 @@ public class Widget {
 
   public void setValue(String value) {
     this.value = value;
-  }
-
-  public Enum<DataType> getDataType() {
-    return dataType;
-  }
-
-  public void setDataType(Enum<DataType> dataType) {
-    this.dataType = dataType;
   }
 }
