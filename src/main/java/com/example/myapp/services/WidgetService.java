@@ -9,9 +9,11 @@ public class WidgetService {
 
   public WidgetService() {
     this.widgetsAL = new ArrayList<>();
-    widgetsAL.add(new Widget("GRNIG", 654326L, "HEADING", 1, "FJIOgreWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg",null));
-    widgetsAL.add(new Widget("GRNIgvweG", 6326L, "PARAGRAPH", 1, "FgerwgJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg",null));
-    widgetsAL.add(new Widget("GRNgewgeIG", 654336L, "IMAGE", 1, "gerwgeFJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg",null));
+    widgetsAL.add(new Widget("mbklreij", 654326L, "HEADING", 1, "FJIOgreWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","HEADING"));
+    widgetsAL.add(new Widget("otgekmr", 6326L, "PARAGRAPH", 1, "FgerwgJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","PARAGRAPH"));
+    widgetsAL.add(new Widget("otjtmekhrleIG", 654336L, "LIST", 1, "gerwgeFJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","LIST"));
+    widgetsAL.add(new Widget("fniewgnIG", 504362L, "IMAGE", 1, "gerwgeFJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","IMAGE"));
+    widgetsAL.add(new Widget("orewngkf", 543906L, "LINK", 1, "gerwgeFJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","LINK"));
   }
 
   public List<Widget> createWidget(Widget widget) {
@@ -27,7 +29,7 @@ public class WidgetService {
 
   public Widget findWidgetById(Long widgetId) {
     for (Widget w: this.widgetsAL) {
-      if (w.getId() == widgetId) {
+      if (w.getId().equals(widgetId)) {
         return w;
       }
     }
@@ -37,7 +39,7 @@ public class WidgetService {
 
   public List<Widget> updateWidget(Long widgetId, Widget passedWidget) {
     for (int i = 0; i < this.widgetsAL.size(); i++) {
-      if (this.widgetsAL.get(i).getId() == widgetId) {
+      if (this.widgetsAL.get(i).getId().equals(widgetId)) {
         this.widgetsAL.set(i, passedWidget);
         return this.widgetsAL;
       }

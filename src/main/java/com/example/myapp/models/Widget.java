@@ -16,17 +16,6 @@ public class Widget {
   private String value;
   private String dataType; //make ENUM
 
-  enum Type {
-
-  }
-
-  enum DataType {
-
-  }
-
-
-
-
   public Widget(String name, Long id, String type, int order, String text, String url, Integer size, Integer width, Integer height, String cssClass, String style, String value, String dataType) {
     this.name = name;
     this.id = id;
@@ -141,5 +130,21 @@ public class Widget {
 
   public void setValue(String value) {
     this.value = value;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public String getDataType() {
+    return dataType;
+  }
+
+  public void setDataType(String dataType) {
+    this.dataType = dataType;
   }
 }
