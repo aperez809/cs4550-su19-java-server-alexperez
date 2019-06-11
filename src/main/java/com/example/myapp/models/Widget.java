@@ -1,9 +1,14 @@
 package com.example.myapp.models;
 
+import javax.persistence.*;
+
+@Entity
 public class Widget {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
   private String name;
-  private Long id;
   private String wtype; //make ENUM
   private int order;
   private String text;
@@ -17,7 +22,7 @@ public class Widget {
   private String dataType; //make ENUM
 
 
-  public Widget(String name, Long id, String type, int order, String text, String url, Integer size, Integer width, Integer height, String cssClass, String style, String value, String dataType) {
+  public Widget(String name, int id, String type, int order, String text, String url, Integer size, Integer width, Integer height, String cssClass, String style, String value, String dataType) {
     this.name = name;
     this.id = id;
     this.wtype = type;
@@ -33,7 +38,7 @@ public class Widget {
     this.dataType = dataType;
   }
 
-  public Widget(Long id, String name, String type) {
+  public Widget(int id, String name, String type) {
     this.id = id;
     this.name = name;
     this.wtype = type;
@@ -57,11 +62,11 @@ public class Widget {
     this.name = name;
   }
 
-  public Long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(int id) {
     this.id = id;
   }
 

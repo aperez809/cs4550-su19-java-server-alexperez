@@ -27,7 +27,7 @@ public class WidgetService {
   }
 
 
-  public Widget findWidgetById(Long widgetId) {
+  public Widget findWidgetById(int widgetId) {
     for (Widget w: this.widgetsAL) {
       if (w.getId().equals(widgetId)) {
         return w;
@@ -37,7 +37,7 @@ public class WidgetService {
     return null;
   }
 
-  public List<Widget> updateWidget(Long widgetId, Widget passedWidget) {
+  public List<Widget> updateWidget(int widgetId, Widget passedWidget) {
     for (int i = 0; i < this.widgetsAL.size(); i++) {
       if (this.widgetsAL.get(i).getId().equals(widgetId)) {
         this.widgetsAL.set(i, passedWidget);
@@ -47,7 +47,7 @@ public class WidgetService {
     return null;
   }
 
-  public List<Widget> deleteWidget(Long widgetId) {
+  public List<Widget> deleteWidget(int widgetId) {
     for (int i = 0; i < this.widgetsAL.size(); i++) {
       if (this.widgetsAL.get(i).getId().equals(widgetId)) {
         this.widgetsAL.remove(i);

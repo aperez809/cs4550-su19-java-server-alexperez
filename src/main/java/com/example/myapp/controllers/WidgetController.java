@@ -24,17 +24,17 @@ public class WidgetController {
   }
 
   @GetMapping("/api/widgets/{widgetId}")
-  public Widget findWidgetById(@PathVariable("widgetId") Long widgetId) {
+  public Widget findWidgetById(@PathVariable("widgetId") int widgetId) {
     return this.service.findWidgetById(widgetId);
   }
 
   @PutMapping("/api/widgets/{widgetId}")
-  public List<Widget> updateWidget(@PathVariable("widgetId") Long widgetId, @RequestBody Widget passedWidget) {
+  public List<Widget> updateWidget(@PathVariable("widgetId") int widgetId, @RequestBody Widget passedWidget) {
     return this.service.updateWidget(widgetId, passedWidget);
   }
 
   @DeleteMapping("/api/widgets/{widgetId}")
-  public List<Widget> deleteWidget(@PathVariable("widgetId") Long widgetId) {
+  public List<Widget> deleteWidget(@PathVariable("widgetId") int widgetId) {
     return this.service.deleteWidget(widgetId);
   }
 }

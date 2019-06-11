@@ -1,9 +1,15 @@
 package com.example.myapp.models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class User {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
+
   private String username;
   private String password;
   private String firstName;
@@ -41,8 +47,7 @@ public class User {
   }
 
 
-  public User(int id, String username, String password, String firstName, String lastName) {
-    this.id = id;
+  public User(String username, String password, String firstName, String lastName) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;

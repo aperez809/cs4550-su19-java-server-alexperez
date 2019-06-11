@@ -1,6 +1,13 @@
 package com.example.myapp.models;
 
+import javax.persistence.*;
+
+@Entity
 public class ListWidget extends Widget {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+
   private String[] items;
   private boolean ordered;
 
@@ -8,5 +15,9 @@ public class ListWidget extends Widget {
     super(wtype, width, height);
     this.items = items;
     this.ordered = ordered;
+  }
+
+  public ListWidget() {
+    super();
   }
 }
