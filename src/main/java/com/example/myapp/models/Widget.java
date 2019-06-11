@@ -4,7 +4,7 @@ public class Widget {
 
   private String name;
   private Long id;
-  private String type; //make ENUM
+  private String wtype; //make ENUM
   private int order;
   private String text;
   private String url;
@@ -16,10 +16,11 @@ public class Widget {
   private String value;
   private String dataType; //make ENUM
 
+
   public Widget(String name, Long id, String type, int order, String text, String url, Integer size, Integer width, Integer height, String cssClass, String style, String value, String dataType) {
     this.name = name;
     this.id = id;
-    this.type = type;
+    this.wtype = type;
     this.order = order;
     this.text = text;
     this.url = url;
@@ -35,7 +36,13 @@ public class Widget {
   public Widget(Long id, String name, String type) {
     this.id = id;
     this.name = name;
-    this.type = type;
+    this.wtype = type;
+  }
+
+  public Widget(String wtype, Integer width, Integer height) {
+    this.wtype = wtype;
+    this.width = width;
+    this.height = height;
   }
 
   public Widget() {
@@ -132,12 +139,12 @@ public class Widget {
     this.value = value;
   }
 
-  public String getType() {
-    return type;
+  public String getWtype() {
+    return wtype;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setWtype(String wtype) {
+    this.wtype = wtype;
   }
 
   public String getDataType() {
