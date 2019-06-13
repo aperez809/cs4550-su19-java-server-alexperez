@@ -1,54 +1,47 @@
 package com.example.myapp.controllers;
 
 import com.example.myapp.models.Module;
-import com.example.myapp.repositories.ModuleRepository;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.example.myapp.services.ModuleService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@CrossOrigin("*")
 public class ModuleController {
 
-  private ModuleRepository moduleRepo;
+  private ModuleService modService;
 
   @GetMapping("/api/modules")
   public List<Module> findAllModules() {
-    return (List<Module>) moduleRepo.findAll();
+    return modService.findAllModules();
   }
 
   @GetMapping("/api/modules/title/{title}")
   public List<Module> findModuleByTitle(@PathVariable("title") String title) {
-    return moduleRepo.findModuleByTitle(title);
+    return modService.findModuleByTitle(title);
   }
 
   @GetMapping("/api/modules/{moduleId}")
   public Module findModuleById(@PathVariable("moduleId") int moduleId) {
-    Optional<Module> optional = moduleRepo.findById(moduleId);
-    return optional.get();
+    return this.modService.findModuleById(moduleId);
   }
 
   @DeleteMapping("/api/modules/{moduleId}")
   public List<Module> deleteModule(@PathVariable("moduleId") int moduleId) {
-    moduleRepo.deleteById(moduleId);
+    modService.deleteModule(moduleId);
     return this.findAllModules();
   }
 
   @PutMapping("/api/modules/{moduleId}")
   public List<Module> updateModule(@RequestBody Module target, @PathVariable("moduleId") int moduleId) {
-    Optional<Module> optional = moduleRepo.findById(moduleId);
-    Module module = optional.get();
-    module.setLessons(target.getLessons());
-    module.setCourse(target.getCourse());
-    module.setTitle(target.getTitle());
-
+    modService.updateModule(target, moduleId);
     return this.findAllModules();
   }
 
   @PostMapping("/api/modules")
   public List<Module> createModule(@RequestBody Module module) {
-    moduleRepo.save(module);
+    modService.createModule(module);
     return this.findAllModules();
   }
 
