@@ -9,10 +9,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface FacultyRepository extends CrudRepository<Faculty, Integer>{
-  @Query(value = "select * from user where username=:username", nativeQuery = true)
+  @Query(value = "select * from Users where username=:username", nativeQuery = true)
   List<Faculty> findFacultyByUsername(@Param("username") String username);
 
-  @Query(value = "select faculty from Faculty faculty where faculty.username=:username and faculty.password=:password")
+  @Query(value = "select * from Faculty where faculty.username=:username and faculty.password=:password",
+  nativeQuery = true)
   List<Faculty> findFacultyByCredentials(@Param("username") String username,
                                           @Param("password") String password);
 }

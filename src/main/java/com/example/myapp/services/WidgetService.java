@@ -34,4 +34,8 @@ public class WidgetService {
   public void deleteWidget(int widgetId) {
     widgetRepo.deleteById(widgetId);
   }
+
+  public List<Widget> findAllWidgets(int tid) {
+    return widgetRepo.findWidgetByTopicId(tid);
+  }
 }
