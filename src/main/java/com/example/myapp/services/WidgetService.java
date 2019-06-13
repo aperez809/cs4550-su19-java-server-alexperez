@@ -1,60 +1,37 @@
 package com.example.myapp.services;
 
 import com.example.myapp.models.Widget;
-import java.util.ArrayList;
+import com.example.myapp.repositories.WidgetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import java.util.Optional;
 
 public class WidgetService {
-  private List<Widget> widgetsAL;
-
-  public WidgetService() {
-    this.widgetsAL = new ArrayList<>();
-    widgetsAL.add(new Widget("mbklreij", 654326, "HEADING", 1, "FJIOgreWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","HEADING"));
-    widgetsAL.add(new Widget("otgekmr", 6326, "PARAGRAPH", 1, "FgerwgJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","PARAGRAPH"));
-    widgetsAL.add(new Widget("otjtmekhrleIG", 654336, "LIST", 1, "gerwgeFJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","LIST"));
-    widgetsAL.add(new Widget("fniewgnIG", 504362, "IMAGE", 1, "gerwgeFJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","IMAGE"));
-    widgetsAL.add(new Widget("orewngkf", 543906, "LINK", 1, "gerwgeFJIOWG", "FJEIOWJ", 1,1,1,"fea","gdfsg","fdsg","LINK"));
-  }
-
-  public List<Widget> createWidget(Widget widget) {
-    this.widgetsAL.add(widget);
-    return this.widgetsAL;
-  }
-
+  @Autowired
+  private WidgetRepository widgetRepo;
 
   public List<Widget> findAllWidgets() {
-    return this.widgetsAL;
+    return (List<Widget>) widgetRepo.findAll();
   }
-
 
   public Widget findWidgetById(int widgetId) {
-    for (Widget w: this.widgetsAL) {
-      if (w.getId() == widgetId) {
-        return w;
-      }
-    }
-
-    return null;
+    Optional<Widget> optional = widgetRepo.findById(widgetId);
+    return optional.get();
   }
 
-  public List<Widget> updateWidget(int widgetId, Widget passedWidget) {
-    for (int i = 0; i < this.widgetsAL.size(); i++) {
-      if (this.widgetsAL.get(i).getId() == widgetId) {
-        this.widgetsAL.set(i, passedWidget);
-        return this.widgetsAL;
-      }
-    }
-    return null;
+  public void createWidget(Widget widget) {
+    widgetRepo.save(widget);
   }
 
-  public List<Widget> deleteWidget(int widgetId) {
-    for (int i = 0; i < this.widgetsAL.size(); i++) {
-      if (this.widgetsAL.get(i).getId() == widgetId) {
-        this.widgetsAL.remove(i);
-        return this.widgetsAL;
-      }
-    }
+  public void updateWidget(int widgetId, Widget passedWidget) {
+    Optional<Widget> optional = widgetRepo.findById(widgetId);
+    Widget widget = optional.get();
+    widget.setWtype(passedWidget.getWtype());
+    widget.setWidth(passedWidget.getWidth());
+    widget.setHeight(passedWidget.getHeight());
+  }
 
-    return this.widgetsAL;
+  public void deleteWidget(int widgetId) {
+    widgetRepo.deleteById(widgetId);
   }
 }

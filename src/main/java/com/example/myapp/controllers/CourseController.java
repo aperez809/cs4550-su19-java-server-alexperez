@@ -1,13 +1,10 @@
 package com.example.myapp.controllers;
 
 import com.example.myapp.models.Course;
-import com.example.myapp.repositories.CourseRepository;
 import com.example.myapp.services.CourseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -16,7 +13,7 @@ public class CourseController {
 
   @GetMapping("/api/courses")
   public List<Course> findAllCourses() {
-    return (List<Course>) courseService.findAllCourses();
+    return courseService.findAllCourses();
   }
 
   @GetMapping("/api/courses/title/{title}")
