@@ -49,13 +49,13 @@ public class UserController {
 
   @GetMapping("/api/users/username/{username}")
   public List<User> findUserByUsername(@PathVariable("username") String username) {
-    return (List<User>) userRepo.findUserByUsername(username);
+    return userRepo.findUserByUsername(username);
   }
 
   @GetMapping("/api/users/username/{username}/password/{password}")
   public List<User> findUserByCredentials(@PathVariable("username") String username,
                                           @PathVariable("password") String password) {
-    return (List<User>) userRepo.findUserByCredentials(username, password);
+    return userRepo.findUserByCredentials(username, password);
   }
 
   @GetMapping("/api/users/{userId}")

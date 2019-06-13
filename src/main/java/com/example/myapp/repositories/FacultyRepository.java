@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface FacultyRepository extends CrudRepository<Faculty, Integer>{
   @Query(value = "select * from user where username=:username", nativeQuery = true)
-  public List<Faculty> findFacultyByUsername(@Param("username") String username);
+  List<Faculty> findFacultyByUsername(@Param("username") String username);
 
   @Query(value = "select faculty from Faculty faculty where faculty.username=:username and faculty.password=:password")
-  public List<Faculty> findFacultyByCredentials(@Param("username") String username,
+  List<Faculty> findFacultyByCredentials(@Param("username") String username,
                                           @Param("password") String password);
 }
