@@ -52,5 +52,4 @@ public class CourseController {
     courseRepo.save(course);
     return this.findAllCourses();
   }
-
 }
