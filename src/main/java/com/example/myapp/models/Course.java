@@ -16,9 +16,6 @@ public class Course {
   private String title;
 
   @OneToMany(mappedBy = "course")
-  private List<Section> sections;
-
-  @OneToMany(mappedBy = "course")
   private List<Module> modules;
 
   @ManyToOne
@@ -46,13 +43,6 @@ public class Course {
     this.title = title;
   }
 
-  public List<Section> getSections() {
-    return sections;
-  }
-
-  public void setSections(List<Section> sections) {
-    this.sections = sections;
-  }
 
   public List<Module> getModules() {
     return modules;

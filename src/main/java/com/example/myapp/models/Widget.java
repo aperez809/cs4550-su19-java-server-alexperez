@@ -16,7 +16,7 @@ public class Widget {
   private Topic topic;
   private String name;
   private String wtype; //make ENUM
-  private int order;
+  private int listOrder;
   private String text;
   private String url;
   private Integer size = null;
@@ -32,7 +32,7 @@ public class Widget {
     this.name = name;
     this.id = id;
     this.wtype = type;
-    this.order = order;
+    this.listOrder = order;
     this.text = text;
     this.url = url;
     this.size = size;
@@ -78,12 +78,12 @@ public class Widget {
 
 
 
-  public int getOrder() {
-    return order;
+  public int getListOrder() {
+    return listOrder;
   }
 
-  public void setOrder(int order) {
-    this.order = order;
+  public void setListOrder(int listOrder) {
+    this.listOrder = listOrder;
   }
 
   public String getText() {

@@ -2,6 +2,7 @@ package com.example.myapp.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="lessons")
@@ -14,7 +15,7 @@ public class Lesson {
   private String title;
 
   @OneToMany(mappedBy = "lesson")
-  private Topic topic;
+  private List<Topic> topics;
 
   @ManyToOne
   @JsonIgnore
@@ -36,11 +37,19 @@ public class Lesson {
     this.title = title;
   }
 
-  public Topic getTopic() {
-    return topic;
+  public List<Topic> getTopics() {
+    return topics;
   }
 
-  public void setTopic(Topic topic) {
-    this.topic = topic;
+  public void setTopics(List<Topic> topics) {
+    this.topics = topics;
+  }
+
+  public Module getModule() {
+    return module;
+  }
+
+  public void setModule(Module module) {
+    this.module = module;
   }
 }
