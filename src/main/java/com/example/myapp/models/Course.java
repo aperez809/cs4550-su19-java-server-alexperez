@@ -1,27 +1,33 @@
 package com.example.myapp.models;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
+
 
 @Entity
+@Table(name="course")
 public class Course {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
   private String title;
-  private Section section;
-  private Module module;
+
+  @OneToMany(mappedBy = "course")
+  private List<Section> sections;
+
+  @OneToMany(mappedBy = "course")
+  private List<Module> modules;
+
+  @ManyToOne
+  @JsonIgnore
   private Faculty author;
 
-  public Course(String title, Section section, Module module, Faculty author) {
-    this.title = title;
-    this.section = section;
-    this.module = module;
-    this.author = author;
-  }
-
-  public Course() {
-    super();
+  @Transient
+  public String getAuthorName() {
+    return author != null ? author.getFirstName() + " " + author.getLastName() : "";
   }
 
   public int getId() {
@@ -40,20 +46,20 @@ public class Course {
     this.title = title;
   }
 
-  public Section getSection() {
-    return section;
+  public List<Section> getSections() {
+    return sections;
   }
 
-  public void setSection(Section section) {
-    this.section = section;
+  public void setSections(List<Section> sections) {
+    this.sections = sections;
   }
 
-  public Module getModule() {
-    return module;
+  public List<Module> getModules() {
+    return modules;
   }
 
-  public void setModule(Module module) {
-    this.module = module;
+  public void setModules(List<Module> modules) {
+    this.modules = modules;
   }
 
   public Faculty getAuthor() {

@@ -31,6 +31,4 @@ public class UserService {
   public User createUser(@RequestBody User user) {
     return userRepo.save(user);
   }
-
-
 }

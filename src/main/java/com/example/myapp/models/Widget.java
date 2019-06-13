@@ -1,13 +1,19 @@
 package com.example.myapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name="Widgets")
 public class Widget {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @ManyToOne
+  @JsonIgnore
+  private Topic topic;
   private String name;
   private String wtype; //make ENUM
   private int order;

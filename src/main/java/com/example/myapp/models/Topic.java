@@ -1,11 +1,54 @@
 package com.example.myapp.models;
 
-public class Topic {
-  private String title;
-  private Widget widget;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-  public Topic(String title, Widget widget) {
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name="Topics")
+public class Topic {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private String title;
+
+  @OneToMany(mappedBy = "topic")
+  private List<Widget> widgets;
+
+  @ManyToOne
+  @JsonIgnore
+  private Lesson lesson;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
     this.title = title;
-    this.widget = widget;
+  }
+
+  public List<Widget> getWidgets() {
+    return widgets;
+  }
+
+  public void setWidgets(List<Widget> widgets) {
+    this.widgets = widgets;
+  }
+
+  public Lesson getLesson() {
+    return lesson;
+  }
+
+  public void setLesson(Lesson lesson) {
+    this.lesson = lesson;
   }
 }

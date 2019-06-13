@@ -1,35 +1,15 @@
 package com.example.myapp.models;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Faculty extends User {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
-
   private String office;
   private boolean tenured;
 
-  public Faculty(String username, String password, String firstName, String lastName, String office, boolean tenured) {
-    super(username, password, firstName, lastName);
-    this.office = office;
-    this.tenured = tenured;
-  }
-
-  public Faculty() {
-    super();
-  }
-
-  @Override
-  public int getId() {
-    return id;
-  }
-
-  @Override
-  public void setId(int id) {
-    this.id = id;
-  }
+  @OneToMany(mappedBy = "author")
+  private List<Course> authoredCourses;
 
   public String getOffice() {
     return office;
@@ -45,5 +25,13 @@ public class Faculty extends User {
 
   public void setTenured(boolean tenured) {
     this.tenured = tenured;
+  }
+
+  public List<Course> getAuthoredCourses() {
+    return authoredCourses;
+  }
+
+  public void setAuthoredCourses(List<Course> authoredCourses) {
+    this.authoredCourses = authoredCourses;
   }
 }

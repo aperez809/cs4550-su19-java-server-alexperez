@@ -1,23 +1,24 @@
 package com.example.myapp.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name="lessons")
 public class Lesson {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
   private String title;
+
+  @OneToMany(mappedBy = "lesson")
   private Topic topic;
 
-  public Lesson(String title, Topic topic) {
-    this.title = title;
-    this.topic = topic;
-  }
-
-  public Lesson() {
-    super();
-  }
+  @ManyToOne
+  @JsonIgnore
+  private Module module;
 
   public int getId() {
     return id;
