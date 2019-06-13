@@ -1,15 +1,16 @@
 package com.example.myapp.controllers;
 
 import com.example.myapp.models.User;
+import com.example.myapp.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class UserController {
+  @Autowired
+  UserRepository userRepo;
   private int idIncrementer = 3;
   User[] users = {
           new User(1,
@@ -43,54 +44,47 @@ public class UserController {
 
   @GetMapping("/api/users")
   public List<User> findAllUsers() {
-    return userAL;
+    return (List<User>) userRepo.findAll();
   }
 
-  @GetMapping("/api/users/find/{userId}")
+  @GetMapping("/api/users/username/{username}")
+  public List<User> findUserByUsername(@PathVariable("username") String username) {
+    return (List<User>) userRepo.findUserByUsername(username);
+  }
+
+  @GetMapping("/api/users/username/{username}/password/{password}")
+  public List<User> findUserByCredentials(@PathVariable("username") String username,
+                                          @PathVariable("password") String password) {
+    return (List<User>) userRepo.findUserByCredentials(username, password);
+  }
+
+  @GetMapping("/api/users/{userId}")
   public User findUserById(@PathVariable int userId) {
-    for (User u: userAL) {
-      if (u.getId() == userId) {
-        return u;
-      }
-    }
-    return null;
+    Optional<User> optional = userRepo.findById(userId);
+    return optional.get();
   }
 
-  @DeleteMapping("/api/users/delete/{userId}")
+  @DeleteMapping("/api/users/{userId}")
   public List<User> deleteUser(@PathVariable("userId") int userId) {
-    User toDelete = null;
-
-    for (User u: userAL) {
-      if (u.getId() == userId) {
-        toDelete = u;
-      }
-    }
-
-    if (toDelete != null) {
-      userAL.remove(toDelete);
-    }
-    return userAL;
+    userRepo.deleteById(userId);
+    return this.findAllUsers();
   }
 
-  @PutMapping("/api/users/update/{userId}")
+  @PutMapping("/api/users/{userId}")
   public List<User> updateUser(@RequestBody User target, @PathVariable("userId") int userId) {
-    for (User u: userAL) {
-      if (u.getId() == userId) {
-        u.setUsername(target.getUsername());
-        u.setPassword(target.getPassword());
-        u.setFirstName(target.getFirstName());
-        u.setLastName(target.getLastName());
-      }
-    }
+    Optional<User> optional = userRepo.findById(userId);
+    User user = optional.get();
+    user.setUsername(target.getUsername());
+    user.setFirstName(target.getFirstName());
+    user.setLastName(target.getLastName());
+    user.setPassword(target.getPassword());
 
-    return userAL;
+    return this.findAllUsers();
   }
 
-  @PostMapping("/api/users/create")
+  @PostMapping("/api/users")
   public List<User> createUser(@RequestBody User u) {
-    idIncrementer += 1;
-    u.setId(idIncrementer);
-    userAL.add(u);
-    return userAL;
+    userRepo.save(u);
+    return this.findAllUsers();
   }
 }
