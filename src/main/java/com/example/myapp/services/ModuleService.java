@@ -3,10 +3,12 @@ package com.example.myapp.services;
 import com.example.myapp.models.Module;
 import com.example.myapp.repositories.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ModuleService {
   @Autowired
   private ModuleRepository moduleRepo;
@@ -34,10 +36,15 @@ public class ModuleService {
     module.setLessons(target.getLessons());
     module.setCourse(target.getCourse());
     module.setTitle(target.getTitle());
+
+    moduleRepo.save(module);
   }
 
   public void createModule(Module module) {
     moduleRepo.save(module);
   }
 
+  public List<Module> findModuleByCourseId(int courseId) {
+    return moduleRepo.findModuleByCourseId(courseId);
+  }
 }

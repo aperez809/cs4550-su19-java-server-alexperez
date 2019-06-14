@@ -15,7 +15,7 @@ public class Widget {
   @JsonIgnore
   private Topic topic;
   private String name;
-  private String wtype; //make ENUM
+  private String type; //make ENUM
   private int listOrder;
   private String text;
   private String url;
@@ -31,7 +31,7 @@ public class Widget {
   public Widget(String name, int id, String type, int order, String text, String url, Integer size, Integer width, Integer height, String cssClass, String style, String value, String dataType) {
     this.name = name;
     this.id = id;
-    this.wtype = type;
+    this.type = type;
     this.listOrder = order;
     this.text = text;
     this.url = url;
@@ -47,11 +47,11 @@ public class Widget {
   public Widget(int id, String name, String type) {
     this.id = id;
     this.name = name;
-    this.wtype = type;
+    this.type = type;
   }
 
   public Widget(String wtype, Integer width, Integer height) {
-    this.wtype = wtype;
+    this.type = wtype;
     this.width = width;
     this.height = height;
   }
@@ -150,12 +150,12 @@ public class Widget {
     this.value = value;
   }
 
-  public String getWtype() {
-    return wtype;
+  public String getType() {
+    return type;
   }
 
-  public void setWtype(String wtype) {
-    this.wtype = wtype;
+  public void setType(String type) {
+    this.type = type;
   }
 
   public String getDataType() {

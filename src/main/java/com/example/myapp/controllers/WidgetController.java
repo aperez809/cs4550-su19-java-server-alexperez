@@ -2,12 +2,15 @@ package com.example.myapp.controllers;
 
 import com.example.myapp.models.Widget;
 import com.example.myapp.services.WidgetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @CrossOrigin("*")
 public class WidgetController {
+
+  @Autowired
   private WidgetService widgetService;
   /*private WidgetController() {
     this.service = new WidgetService();
@@ -38,6 +41,7 @@ public class WidgetController {
 
   @PostMapping("/api/widgets")
   public List<Widget> createWidget(@RequestBody Widget widget) {
+    System.out.println(widget);
     widgetService.createWidget(widget);
     return this.findAllWidgets();
   }

@@ -1,7 +1,10 @@
 package com.example.myapp.controllers;
 
 import com.example.myapp.models.Course;
+import com.example.myapp.models.Module;
 import com.example.myapp.services.CourseService;
+import com.example.myapp.services.ModuleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,7 +12,12 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 public class CourseController {
+
+  @Autowired
   private CourseService courseService;
+
+  @Autowired
+  private ModuleService modService;
 
   @GetMapping("/api/courses")
   public List<Course> findAllCourses() {
@@ -37,6 +45,17 @@ public class CourseController {
   public List<Course> updateCourse(@RequestBody Course target, @PathVariable("courseId") int courseId) {
     courseService.updateCourse(target, courseId);
     return this.findAllCourses();
+  }
+
+  @PutMapping("/api/courses/{cid}/modules/{mid}")
+  public void setModuleBelongingToCourse(@PathVariable("cid") Integer cid,
+                                         @PathVariable("mid") Integer mid) {
+    Course course = courseService.findCourseById(cid);
+    Module module = modService.findModuleById(mid);
+
+    module.setCourse(course);
+
+    modService.updateModule(module, mid);
   }
 
   @PostMapping("/api/courses")

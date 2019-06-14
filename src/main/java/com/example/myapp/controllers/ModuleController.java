@@ -2,6 +2,7 @@ package com.example.myapp.controllers;
 
 import com.example.myapp.models.Module;
 import com.example.myapp.services.ModuleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class ModuleController {
 
+  @Autowired
   private ModuleService modService;
 
   @GetMapping("/api/modules")
@@ -25,6 +27,11 @@ public class ModuleController {
   @GetMapping("/api/modules/{moduleId}")
   public Module findModuleById(@PathVariable("moduleId") int moduleId) {
     return this.modService.findModuleById(moduleId);
+  }
+
+  @GetMapping("/api/courses/{courseId}/modules")
+  public List<Module> findModuleByCourseId(@PathVariable("courseId") int courseId) {
+    return this.modService.findModuleByCourseId(courseId);
   }
 
   @DeleteMapping("/api/modules/{moduleId}")

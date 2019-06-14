@@ -3,10 +3,14 @@ package com.example.myapp.services;
 import com.example.myapp.models.Widget;
 import com.example.myapp.repositories.WidgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class WidgetService {
+
   @Autowired
   private WidgetRepository widgetRepo;
 
@@ -26,9 +30,11 @@ public class WidgetService {
   public void updateWidget(int widgetId, Widget passedWidget) {
     Optional<Widget> optional = widgetRepo.findById(widgetId);
     Widget widget = optional.get();
-    widget.setWtype(passedWidget.getWtype());
+    widget.setType(passedWidget.getType());
     widget.setWidth(passedWidget.getWidth());
     widget.setHeight(passedWidget.getHeight());
+
+    widgetRepo.save(widget);
   }
 
   public void deleteWidget(int widgetId) {
