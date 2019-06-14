@@ -27,7 +27,7 @@ public class WidgetService {
     widgetRepo.save(widget);
   }
 
-  public void updateWidget(int widgetId, Widget passedWidget) {
+  public void updateWidget(Widget passedWidget, int widgetId) {
     Optional<Widget> optional = widgetRepo.findById(widgetId);
     Widget widget = optional.get();
     widget.setType(passedWidget.getType());

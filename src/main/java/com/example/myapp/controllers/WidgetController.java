@@ -35,7 +35,7 @@ public class WidgetController {
 
   @PutMapping("/api/widgets/{widgetId}")
   public List<Widget> updateWidget(@PathVariable("widgetId") int widgetId, @RequestBody Widget passedWidget) {
-    widgetService.updateWidget(widgetId, passedWidget);
+    widgetService.updateWidget(passedWidget, widgetId);
     return this.findAllWidgets();
   }
 

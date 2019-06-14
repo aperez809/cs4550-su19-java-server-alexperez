@@ -165,4 +165,12 @@ public class Widget {
   public void setDataType(String dataType) {
     this.dataType = dataType;
   }
+
+  public Topic getTopic() {
+    return topic;
+  }
+
+  public void setTopic(Topic topic) {
+    this.topic = topic;
+  }
 }

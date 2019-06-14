@@ -1,11 +1,8 @@
 package com.example.myapp.controllers;
 
-import com.example.myapp.models.Course;
 import com.example.myapp.models.Lesson;
-import com.example.myapp.models.Module;
 import com.example.myapp.models.Topic;
 import com.example.myapp.services.LessonService;
-import com.example.myapp.services.ModuleService;
 import com.example.myapp.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +39,8 @@ public class LessonController {
   }
 
   @PutMapping("/api/lessons/{lid}/topics/{tid}")
-  public void setLessonBelongingToModule(@PathVariable("mid") Integer lid,
-                                         @PathVariable("lid") Integer tid) {
+  public void setLessonBelongingToModule(@PathVariable("lid") Integer lid,
+                                         @PathVariable("tid") Integer tid) {
     Lesson lesson = lessonService.findLessonById(lid);
     Topic topic = topicService.findTopicById(tid);
 
@@ -53,18 +50,18 @@ public class LessonController {
   }
 
   @DeleteMapping("/api/lessons/{lessonId}")
-  public List<Lesson> deleteLesson(@PathVariable("moduleId") int lessonId) {
+  public List<Lesson> deleteLesson(@PathVariable("lessonId") int lessonId) {
     lessonService.deleteLesson(lessonId);
     return this.findAllLessons();
   }
 
   @PutMapping("/api/lessons/{lessonId}")
-  public List<Lesson> updateLesson(@RequestBody Lesson target, @PathVariable("moduleId") int lessonId) {
+  public List<Lesson> updateLesson(@RequestBody Lesson target, @PathVariable("lessonId") int lessonId) {
     lessonService.updateLesson(target, lessonId);
     return this.findAllLessons();
   }
 
-  @PostMapping("/api/modules")
+  @PostMapping("/api/lessons")
   public List<Lesson> createLesson(@RequestBody Lesson module) {
     lessonService.createLesson(module);
     return this.findAllLessons();
